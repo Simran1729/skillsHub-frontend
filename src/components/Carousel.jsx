@@ -4,20 +4,6 @@ import { motion } from 'framer-motion';
 function Carousel({images}) {
     const carouselRef = useRef(null);
 
-    useEffect(() => {
-      const handleScroll = () => {
-        const scroll = carouselRef.current;
-        if (scroll) {
-          scroll.scrollLeft += 1; // Adjust the speed of the scroll here
-        }
-      };
-  
-      const interval = setInterval(handleScroll, 200); // Speed of animation
-  
-      return () => clearInterval(interval);
-    }, []);
-
-
   return (
     <div className="w-screen overflow-hidden relative">
          <motion.div
@@ -25,7 +11,7 @@ function Carousel({images}) {
         ref={carouselRef}
         initial={{ x: 0 }}
         animate={{ x: '-100%' }}
-        transition={{ repeat: Infinity, ease: 'linear', duration: 150 }} // Control the speed with `duration`
+        transition={{ repeat: Infinity, ease: 'linear', duration: 150 , while: 'scrollLeft < carouselRef.current.scrollWidth'}} // Control the speed with `duration`
       >
         {images.map((image, index) => (
           <div key={index} className="min-w-[300px] relative">
