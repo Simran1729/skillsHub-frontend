@@ -13,6 +13,8 @@ import car7 from '../assets/homePage/car7.png'
 import car8 from '../assets/homePage/car8.png'
 import car9 from '../assets/homePage/car9.png'
 import car10 from '../assets/homePage/car10.png'
+import instructor from "../assets/homePage/instructor.png"
+import Footer from '../components/Footer';
 
 const data = [
   "Thousands of creative classes. Beginner to pro.",
@@ -75,10 +77,47 @@ function HomePage() {
             <img />
         </section>
 
-        <section>
-            <div>reviews</div>
-            {/* reviews from enrolled students */}
+        <section className = "font-poppins flex-col justify-center text-my-dark-blue text-center py-10">
+              <div>
+                <p className = "text-5xl font-bold py-8">Why Students Love skillsHub</p>
+                {/* <div className = "bg-my-green h-2 w-1/12 mx-auto my-6"></div> */}
+                <p className = "text-2xl w-1/3 mx-auto">Whether it's a first brush on canvas or the last frame in an animation, skillsHub is here to support you on every step of your creative journey.</p>
+              </div>
+
+              <div className = "py-20">
+                <p className = "text-4xl font-semibold w-2/5 mx-auto">"I come to skillsHub for the curation and class quality. That's really worth the cost of membership to me."</p>
+                <p className = "text-2xl font-bold py-10">-Jason R, skillsHub student</p>
+                <div className = "bg-my-green h-2 w-1/12 mx-auto"></div>
+              </div>
+
+              <div> 
+                <p className = "text-4xl font-semibold w-2/5 mx-auto">"I have an understanding that, even if the work is not perfect, it's a work in progress. And the reason why I'm on skillsHub is to develop a skill. I feel that it's a safe space."</p>
+                <p className = "text-2xl font-bold py-10">-DeVeor R, skillsHub student</p>
+                <div className = "bg-my-green h-2 w-1/12 mx-auto"></div>
+              </div>
         </section>
+
+        <section className = "w-full flex bg-black font-poppins text-white">
+                <div className = "mx-auto px-14">
+                    <p className = "text-5xl font-bold py-7">Become an Instructor</p>
+                    <p className = "text-2xl w-4/5 leading-relaxed">Unleash your teaching potential! Become an instructor on 
+                    Skillshub and monetize your knowledge. Whether you're a seasoned 
+                    educator or a passionate expert, we provide the tools and support 
+                    to help you succeed in the online learning space.</p>
+                    <div className = "py-7">
+                    <button className= "font-semibold px-4 bg-my-green py-2 text-xl rounded-md mr-3 text-my-dark-blue">Sign up</button>
+                    </div>
+                </div>
+                
+              
+                <div>
+                  <img src={instructor} className = "object-contain" />
+                </div>
+        </section>
+
+
+        <Footer/>
+
     </>
   )
 }

@@ -5,7 +5,7 @@ function Carousel({images}) {
     const carouselRef = useRef(null);
 
   return (
-    <div className="w-screen overflow-hidden relative">
+    <div className="w-full overflow-hidden relative">
          <motion.div
         className="flex w-max"
         ref={carouselRef}
