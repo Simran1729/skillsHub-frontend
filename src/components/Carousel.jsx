@@ -7,7 +7,7 @@ function Carousel({images}) {
   return (
     <div className="w-full overflow-hidden relative">
          <motion.div
-        className="flex w-max"
+        className="flex w-full"
         ref={carouselRef}
         initial={{ x: 0 }}
         animate={{ x: '-100%' }}
