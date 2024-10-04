@@ -1,5 +1,4 @@
 import React from 'react'
-import NavBar from '../components/NavBar'
 import teacher from '../assets/homePage/teacher.png'
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
 import Carousel from '../components/Carousel';
@@ -33,9 +32,7 @@ const images = [
 function HomePage() {
   return (
     <>
-        <NavBar/>
-        
-        {/* <section className="flex flex-col md:flex-row w-full justify-around pt-5">
+        <section className="flex flex-col md:flex-row w-full justify-around pt-5">
             <div className="font-poppins text-my-dark-blue md:w-3/12 flex flex-col justify-center">
               <p className="text-4xl md:text-6xl font-bold sm:px-2">Become a pro with thousands of creative classes</p>
               <p className="font-semibold text-lg md:text-xl py-5 sm:px-2">
@@ -47,10 +44,10 @@ function HomePage() {
             <div className="w-full md:w-6/12">
               <img src={teacher} className="w-full h-auto" alt="Teacher" />
             </div>
-        </section> */}
+        </section>
 
 
-        <section className="flex flex-col md:flex-row w-full justify-around pt-5">
+        {/* <section className="flex flex-col md:flex-row w-full justify-around pt-5">
           <div className="font-poppins text-my-dark-blue md:w-3/12 flex flex-col justify-center">
             <motion.p 
               initial={{ opacity: 0, y: 20 }} 
@@ -79,7 +76,7 @@ function HomePage() {
           <div className="w-full md:w-6/12">
             <img src={teacher} className="w-full h-auto" alt="Teacher" />
           </div>
-        </section>
+        </section> */}
 
 
         <section>
@@ -146,9 +143,6 @@ function HomePage() {
           <img src={instructor} className="object-cover md:w-2/3 md:h-auto lg:w-[50%] lg:h-auto xl:w-3/4 xl:h-auto shadow-sm shadow-my-green" alt="Instructor" />
         </div>
     </section>
-
-      <Footer/>
-
     </>
   )
 }

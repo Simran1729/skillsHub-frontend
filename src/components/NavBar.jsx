@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import logo from "../assets/logo.png";
+import darkLogo from "../assets/dark_logo.png"
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoMenuSharp } from "react-icons/io5";
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import {NavLinks} from "../data/NavBarData"
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,22 +14,28 @@ function NavBar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const location = useLocation();
+  
+  const isHomePage = location.pathname === '/';
+
   return (
     <>
-      <div className="flex justify-between font-poppins py-2 px-2 items-center">
+      <div className=  {`flex justify-between font-poppins py-2 px-2 items-center ${!isHomePage ? 'bg-my-dark-blue text-white' : 'bg-white text-black'}`}>
         {/* Logo */}
         <div>
-          <img src={logo} className="max-h-12" alt="Logo" />
+          <Link to={"/"}>
+            <img src={isHomePage ? logo : darkLogo} className={`${!isHomePage ? 'max-h-8' : 'max-h-10' }`} alt="Logo" />
+          </Link>
         </div>
 
         {/* Search and Browse (hidden on mobile) */}
         <div className="hidden md:flex w-[30%]">
-          <div className="font-semibold mr-8 py-2 hover:text-my-blue flex">
+          <div className= {`font-semibold mr-8 py-2 flex ${isHomePage ? 'hover:text-my-blue' : 'hover:text-my-green'}`}>
             Browse 
             <span className="pt-1 px-2"><IoIosArrowDown /></span>
           </div>
           <div className="relative w-full flex">
-            <CiSearch className="relative text-3xl top-2 left-8" />
+          <CiSearch className= "relative text-3xl top-2 left-8 text-black"/>
             <input 
               type="text" 
               placeholder="Search for skills or courses" 
@@ -36,15 +44,20 @@ function NavBar() {
           </div>
         </div>
 
-        {/* Nav Links (hidden on mobile) */}
+        
         <div className="hidden md:flex">
-          <div className="flex font-poppins font-semibold gap-5 py-2">
-            <div className="hover:text-my-blue">About Us</div>
-            <div className="hover:text-my-blue">Contact Us</div>
-            <div className="hover:text-my-blue cursor-pointer mr-8">Sign in</div>
+          <div className="flex font-poppins font-semibold gap-5 py-2 px-4">
+            {
+              NavLinks.map((ele, index) => {
+                return <div key={index} className = {`font-poppins font-semibold ${isHomePage ? 'hover:text-my-blue' : 'hover:text-my-green'}`}>
+                  <Link to={ele.link}>{ele.name}</Link>
+                </div>
+              })
+            }
           </div>
-          <button className="font-semibold px-4 bg-my-green py-2 text-xl rounded-md mr-3 text-my-dark-blue">Sign up</button>
+          <button className="font-semibold px-4 bg-my-green py-2 text-xl rounded-md mr-3 text-my-dark-blue font-poppins">Sign up</button>
         </div>
+        
 
         {/* Hamburger Icon (visible on mobile) */}
         <div className="md:hidden">
@@ -54,14 +67,16 @@ function NavBar() {
         </div>
       </div>
 
-      {/* Mobile Menu (visible when toggled) */}
       {isMenuOpen && (
-        <div className="md:hidden flex flex-col bg-white shadow-lg p-4">
-          <div className="font-semibold py-2 hover:text-my-blue">Browse</div>
-          <div className="font-semibold py-2 hover:text-my-blue">About Us</div>
-          <div className="font-semibold py-2 hover:text-my-blue">Contact Us</div>
-          <div className="font-semibold py-2 hover:text-my-blue cursor-pointer">Sign in</div>
-          <button className="font-semibold px-4 bg-my-green py-2 text-xl rounded-md mt-3 text-my-dark-blue">Sign up</button>
+        <div className= {`md:hidden flex flex-col shadow-lg font-semibold p-4 ${!isHomePage ? 'bg-my-dark-blue text-white' : 'bg-white text-black'}`} >
+        {
+          NavLinks.map((ele, index) => {
+            return <div key={index} className = {`py-2 ${isHomePage ? 'hover:text-my-blue' : 'hover:text-my-green'}`}>
+              <Link to={ele.link}>{ele.name}</Link>
+            </div>
+          })
+        }
+          <button className="px-4 bg-my-green py-2 text-xl rounded-md mt-3 text-my-dark-blue">Sign up</button>
         </div>
       )}
     </>

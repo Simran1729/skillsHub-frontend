@@ -1,37 +1,34 @@
 import React from 'react';
 import { FaRegCopyright } from "react-icons/fa6";
 import { GoDotFill } from "react-icons/go";
+import { useLocation } from 'react-router-dom';
+import {FooterLinks} from "../data/FooterLinks"
 
 function Footer() {
+
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
   return (
-    <div className="font-poppins text-my-dark-blue flex flex-col">
+    <div className={`font-poppins text-my-dark-blue flex flex-col ${!isHomePage ? 'bg-my-dark-blue text-white' : 'bg-white text-black'}`}>
       {/* Sections */}
-      <div className="flex flex-col sm:flex-row sm:gap-8 md:gap-10 lg:gap-20 w-11/12 mx-auto">
-        {/* Company Section */}
-        <div className="mb-6 sm:mb-0">
-          <p className="font-semibold text-xl py-6">Company</p>
-          <p className="hover:text-my-blue hover:underline py-1 hover:cursor-pointer">About</p>
-          <p className="hover:text-my-blue hover:underline py-1 hover:cursor-pointer">Careers</p>
-          <p className="hover:text-my-blue hover:underline py-1 hover:cursor-pointer">Blog</p>
-          <p className="hover:text-my-blue hover:underline py-1 hover:cursor-pointer">Partnership</p>
-        </div>
 
-        {/* Community Section */}
-        <div className="mb-6 sm:mb-0">
-          <p className="font-semibold text-xl py-6">Community</p>
-          <p className="hover:text-my-blue hover:underline py-1 hover:cursor-pointer">Team plans</p>
-          <p className="hover:text-my-blue hover:underline py-1 hover:cursor-pointer">Git membership Cards</p>
-          <p className="hover:text-my-blue hover:underline py-1 hover:cursor-pointer">Scholarships</p>
+        <div className="mb-6 sm:mb-0 flex flex-col sm:flex-row sm:gap-8 md:gap-10 lg:gap-20 w-11/12 mx-auto">
+          {
+            FooterLinks.map((ele, index) => {
+              return <div key={index} className = "mb-6 sm:mb-0">
+                    <p className = "font-semibold text-xl py-6">{ele.cateogory}</p>
+                    {
+                      ele.links.map((title, index) => {
+                        return <p key={index} className = {`hover:underline py-1 hover:cursor-pointer ${isHomePage ? 'hover:text-my-blue' : 'hover:text-my-green'}`}>
+                            {title}
+                        </p>
+                      })
+                    }
+              </div>
+            })
+          }
         </div>
-
-        {/* Teachers Section */}
-        <div>
-          <p className="font-semibold text-xl py-6">Teachers</p>
-          <p className="hover:text-my-blue hover:underline py-1 hover:cursor-pointer">Become a Teacher</p>
-          <p className="hover:text-my-blue hover:underline py-1 hover:cursor-pointer">Teacher Help Centre</p>
-          <p className="hover:text-my-blue hover:underline py-1 hover:cursor-pointer">Teacher Rules and Requirements</p>
-        </div>
-      </div>
 
       {/* Divider and Terms Section */}
       <div className="w-11/12 mx-auto py-10">
