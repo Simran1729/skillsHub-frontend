@@ -15,7 +15,6 @@ import car10 from '../assets/homePage/car10.png'
 import instructor from "../assets/homePage/instructor.png"
 import Footer from '../components/Footer';
 import { motion } from 'framer-motion';
-
 const data = [
   "Thousands of creative classes. Beginner to pro.",
   "Taught by creative pros and industry icons.",
@@ -143,6 +142,8 @@ function HomePage() {
           <img src={instructor} className="object-cover md:w-2/3 md:h-auto lg:w-[50%] lg:h-auto xl:w-3/4 xl:h-auto shadow-sm shadow-my-green" alt="Instructor" />
         </div>
     </section>
+
+    <Footer/>
     </>
   )
 }

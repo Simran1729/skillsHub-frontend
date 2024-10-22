@@ -9,6 +9,6 @@ export const NavLinks = [
    },
    {
     name : "Sign in",
-    link : "/signIn"
+    link : "/login"
    }
 ]

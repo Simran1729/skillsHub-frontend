@@ -4,15 +4,20 @@ import darkLogo from "../assets/dark_logo.png"
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoMenuSharp } from "react-icons/io5";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {NavLinks} from "../data/NavBarData"
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const SignUpHandler = () => {
+    navigate('/signUp')
+  }
 
   const location = useLocation();
   
@@ -55,7 +60,7 @@ function NavBar() {
               })
             }
           </div>
-          <button className="font-semibold px-4 bg-my-green py-2 text-xl rounded-md mr-3 text-my-dark-blue font-poppins">Sign up</button>
+          <button className="font-semibold px-4 bg-my-green py-2 text-xl rounded-md mr-3 text-my-dark-blue font-poppins" onClick={SignUpHandler}>Sign up</button>
         </div>
         
 
@@ -76,7 +81,7 @@ function NavBar() {
             </div>
           })
         }
-          <button className="px-4 bg-my-green py-2 text-xl rounded-md mt-3 text-my-dark-blue">Sign up</button>
+          <button className="px-4 bg-my-green py-2 text-xl rounded-md mt-3 text-my-dark-blue" onClick={SignUpHandler}>Sign up</button>
         </div>
       )}
     </>
