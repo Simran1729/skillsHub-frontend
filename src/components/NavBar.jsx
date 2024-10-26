@@ -6,8 +6,18 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoMenuSharp } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {NavLinks} from "../data/NavBarData"
+import { useSelector } from 'react-redux';
+import { HiOutlineShoppingCart } from "react-icons/hi";
+import { ACCOUNT_TYPE } from '../utils/constants';
+import ProfileDropDown from "./ProfileDropDown"
 
 function NavBar() {
+
+  // state management
+  let {token} = useSelector((state) => state.auth)
+  let {user}  = useSelector((state) => state.profile)
+  let {totalItems} = useSelector((state) => state.cart)
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate()
 
@@ -22,6 +32,11 @@ function NavBar() {
   const location = useLocation();
   
   const isHomePage = location.pathname === '/';
+
+  // Create a filtered version of NavLinks that conditionally includes the "Sign in" link
+  const filteredNavLinks = token
+  ? NavLinks.filter((link) => link.name !== "Sign in") // Exclude "Sign in" if token exists
+  : NavLinks; // Include all links if token is null or empty 
 
   return (
     <>
@@ -53,14 +68,35 @@ function NavBar() {
         <div className="hidden md:flex">
           <div className="flex font-poppins font-semibold gap-5 py-2 px-4">
             {
-              NavLinks.map((ele, index) => {
+              filteredNavLinks.map((ele, index) => {
                 return <div key={index} className = {`font-poppins font-semibold ${isHomePage ? 'hover:text-my-blue' : 'hover:text-my-green'}`}>
                   <Link to={ele.link}>{ele.name}</Link>
                 </div>
               })
             }
           </div>
-          <button className="font-semibold px-4 bg-my-green py-2 text-xl rounded-md mr-3 text-my-dark-blue font-poppins" onClick={SignUpHandler}>Sign up</button>
+
+          {/* show cart if user is logged in and not an instructor */}
+          {token && user.accountType != ACCOUNT_TYPE.INSTRUCTOR && (
+            <Link to= "/cart">
+            <HiOutlineShoppingCart/>
+            {totalItems > 0 && (
+              <span>{totalItems}</span>
+            )}
+            </Link>
+          )}
+
+          {/* show profile drop down if user is logged in */}
+          {token && (
+              <Link to= "/dashboard">
+                <ProfileDropDown/>
+              </Link>
+          )}
+          
+          {!token && (
+            <button className="font-semibold px-4 bg-my-green py-2 text-xl rounded-md mr-3 text-my-dark-blue font-poppins" onClick={SignUpHandler}>Sign up</button>
+          )}
+
         </div>
         
 
@@ -75,13 +111,32 @@ function NavBar() {
       {isMenuOpen && (
         <div className= {`md:hidden flex flex-col shadow-lg font-semibold p-4 ${!isHomePage ? 'bg-my-dark-blue text-white' : 'bg-white text-black'}`} >
         {
-          NavLinks.map((ele, index) => {
+          filteredNavLinks.map((ele, index) => {
             return <div key={index} className = {`py-2 ${isHomePage ? 'hover:text-my-blue' : 'hover:text-my-green'}`}>
               <Link to={ele.link}>{ele.name}</Link>
             </div>
           })
         }
-          <button className="px-4 bg-my-green py-2 text-xl rounded-md mt-3 text-my-dark-blue" onClick={SignUpHandler}>Sign up</button>
+          {
+            token && user.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+              <Link to= "/cart">
+            <HiOutlineShoppingCart/>
+            {totalItems > 0 && (
+              <span>{totalItems}</span>
+            )}
+            </Link>
+            )
+          }
+          
+          {token && (
+              <Link to = "/dashboard">
+                <ProfileDropDown/>
+              </Link>
+          )}
+          
+          {token === null && (
+            <button className="px-4 bg-my-green py-2 text-xl rounded-md mt-3 text-my-dark-blue" onClick={SignUpHandler}>Sign up</button>
+          )}
         </div>
       )}
     </>

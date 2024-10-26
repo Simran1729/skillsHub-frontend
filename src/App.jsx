@@ -7,6 +7,8 @@ import SignUp from "./Pages/SignUp"
 import AboutUs from "./Pages/AboutUs"
 import Contact from "./Pages/Contact"
 import NotFound from "./Pages/NotFound"
+import Dashboard from './Pages/Dashboard'
+import Cart from './Pages/Cart'
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
       <Route path="/signUp" element={<SignUp/>}/>
       <Route path="/About" element={<AboutUs/>}/>
       <Route path="/Contact" element={<Contact/>} />
+      <Route path="/dashboard" element= {<Dashboard/>} />
+      <Route path = "/cart"  element = {<Cart/>} />
       <Route path="*" element={<NotFound/>}/>
     </Routes>
     </>
